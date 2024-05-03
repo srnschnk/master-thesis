@@ -1,5 +1,15 @@
 # Ignore specific directories
 .ipynb_checkpoints/
+data/
+images/
+mimiciv/2.0/.ipynb_checkpoints
+mimiciv/2.0/data
+mimiciv/2.0/hosp
+mimiciv/2.0/icu
+mimiciv/2.0/images
+mimiciv/2.0/model/.ipynb_checkpoints
+mimiciv/2.0/model/preprocessing/hosp_module_preproc/.ipynb_checkpoints
+mimiciv/2.0/saved_models
 
 mimic-iv-1.0
 scrap
