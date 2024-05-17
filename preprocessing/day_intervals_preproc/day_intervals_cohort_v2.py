@@ -307,7 +307,7 @@ def extract_data(use_ICU:str, label:str, time:int, icd_code:str, root_dir, disea
         death_col='dod'
 
     pts = get_visit_pts(
-        mimic4_path=root_dir+"/mimiciv/2.0/",
+        mimic4_path=root_dir+"/data/mimiciv/2.0/",
         group_col=group_col,
         visit_col=visit_col,
         admit_col=admit_col,
