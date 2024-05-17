@@ -29,10 +29,12 @@ if not os.path.exists("./data/features"):
 if not os.path.exists("./data/features/chartevents"):
     os.makedirs("./data/features/chartevents")
 
-def feature_icu(cohort_output, version_path, diag_flag=True,out_flag=True,chart_flag=True,proc_flag=True,med_flag=True):
+def feature_icu(cohort_output, version_path='data/mimiciv/2.0', diag_flag=True,out_flag=True,chart_flag=True,proc_flag=True,med_flag=True):
     if diag_flag:
+        full_path = version_path + "/hosp/diagnoses_icd.csv.gz"
+        print("Attempting to open:", full_path)
         print("[EXTRACTING DIAGNOSIS DATA]")
-        diag = preproc_icd_module("./"+version_path+"/hosp/diagnoses_icd.csv.gz", './data/cohort/'+cohort_output+'.csv.gz', './utils/mappings/ICD9_to_ICD10_mapping.txt', map_code_colname='diagnosis_code')
+        diag = preproc_icd_module(full_path, './data/cohort/'+cohort_output+'.csv.gz', './utils/mappings/ICD9_to_ICD10_mapping.txt', map_code_colname='diagnosis_code')
         diag[['subject_id', 'hadm_id', 'stay_id', 'icd_code','root_icd10_convert','root']].to_csv("./data/features/preproc_diag_icu.csv.gz", compression='gzip', index=False)
         print("[SUCCESSFULLY SAVED DIAGNOSIS DATA]")
     
