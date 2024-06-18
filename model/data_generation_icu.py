@@ -117,7 +117,7 @@ class Generator():
         final=pd.DataFrame()
         for chart in tqdm(pd.read_csv("./data/features/preproc_chart_icu.csv.gz", compression='gzip', header=0, index_col=None,chunksize=chunksize)):
             chart=chart[chart['stay_id'].isin(self.data['stay_id'])]
-            chart[['start_days', 'dummy','start_hours']] = chart['event_time_from_admit'].str.split(' ', -1, expand=True)
+            chart[['start_days', 'dummy','start_hours']] = chart['event_time_from_admit'].str.split(' ', expand=True)
             chart[['start_hours','min','sec']] = chart['start_hours'].str.split(':', expand=True)
             chart['start_time']=pd.to_numeric(chart['start_days'])*24+pd.to_numeric(chart['start_hours'])
             chart=chart.drop(columns=['start_days', 'dummy','start_hours','min','sec','event_time_from_admit'])
@@ -133,7 +133,7 @@ class Generator():
             if final.empty:
                 final=chart
             else:
-                final=final.append(chart, ignore_index=True)
+                final = pd.concat([final, chart], ignore_index=True)
         
         self.chart=final
         
@@ -319,7 +319,7 @@ class Generator():
                 if final_proc.empty:
                     final_proc=sub_proc
                 else:    
-                    final_proc=final_proc.append(sub_proc)
+                    final_proc = pd.concat([final_proc, sub_proc], ignore_index=True)
                     
               ###OUT
              if(self.feat_out):
@@ -329,7 +329,7 @@ class Generator():
                 if final_out.empty:
                     final_out=sub_out
                 else:    
-                    final_out=final_out.append(sub_out)
+                    final_out = pd.concat([final_out, sub_out], ignore_index=True)
                     
                     
               ###CHART
@@ -340,7 +340,7 @@ class Generator():
                 if final_chart.empty:
                     final_chart=sub_chart
                 else:    
-                    final_chart=final_chart.append(sub_chart)
+                    final_chart = pd.concat([final_chart, sub_chart], ignore_index=True)
             
              t=t+1
         print("bucket",bucket)

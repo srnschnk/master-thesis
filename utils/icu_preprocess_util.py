@@ -210,11 +210,10 @@ def preproc_chart(dataset_path: str, cohort_path:str, time_col:str, dtypes: dict
         if df_cohort.empty:
             df_cohort=chunk_merged
         else:
-            df_cohort=df_cohort.append(chunk_merged, ignore_index=True)
+            df_cohort = pd.concat([df_cohort, chunk_merged], ignore_index=True)
         
-        
-#         nitem.append(chunk_merged.itemid.dropna().unique())
-#         nstay=nstay.append(chunk_merged.stay_id.unique())
+#         nitem.concat(chunk_merged.itemid.dropna().unique())
+#         nstay=nstay.concat(chunk_merged.stay_id.unique())
 #         nrows=nrows+chunk_merged.shape[0]
                 
         
