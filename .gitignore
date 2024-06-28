@@ -17,3 +17,5 @@ scrap
 *.csv.gz
 *summary*.txt
 *.csv
+# Python compiled files
+*.pyc
